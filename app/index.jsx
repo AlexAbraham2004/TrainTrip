@@ -1,7 +1,11 @@
-import { Image, Text, View, StyleSheet} from "react-native";
-import Colors from './../constant/Colors'
+import { Image, Text, View, StyleSheet, TouchableOpacity} from "react-native";
+import Colors from '../constant/Colors'
+import { useRouter } from 'expo-router';
 
 export default function Index() {
+
+  const router = useRouter(); 
+
   return (
     <View
       style={{
@@ -33,26 +37,32 @@ export default function Index() {
           fontWeight: 'bold', 
           textAlign: 'center', 
           color: Colors.WHITE, 
+          fontFamily:'outfit-bold'
         }}>Welcome to Train Trip!</Text>
 
         <Text style={{
           fontSize: 20,
           color: Colors.WHITE,
           marginTop: 20, 
-          textAlign: 'center' 
+          textAlign: 'center',
+          fontFamily:'outfit'
         }}>Stay ahead of your commute with real-time LIRR updates! Get instant notifications on delays, track changes, train timings, and service alerts—all in one seamless app.</Text>
       
-      <View style={styles.button}>
+      <TouchableOpacity style={styles.button}
+        onPress={()=>router.push('/auth/signUp')}
+      >
         <Text style={[styles.buttonText, {color: Colors.PRIMARY}]}>Get Started</Text>
-      </View>
+      </TouchableOpacity>
 
-      <View style={[styles.button, {
-        backgroundColor: Colors.PRIMARY,
-        borderWidth: 1, 
-        borderColor: Colors.WHITE
+      <TouchableOpacity 
+        onPress={() => router.push('/auth/signIn')} 
+        style={[styles.button, {
+          backgroundColor: Colors.PRIMARY,
+          borderWidth: 1, 
+          borderColor: Colors.WHITE
         }]}>
         <Text style={[styles.buttonText, {color: Colors.WHITE}]}>Already Have an Account?</Text>
-      </View>
+      </TouchableOpacity>
 
       </View>
     </View>
@@ -60,14 +70,16 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
-  button:{
+  button: {
     padding: 15, 
     backgroundColor: Colors.WHITE,
     marginTop: 20, 
     borderRadius: 10
   }, 
+
   buttonText: {
     textAlign: 'center', 
     fontSize: 18,
+    fontFamily: 'outfit-semibold'
   }
 })
